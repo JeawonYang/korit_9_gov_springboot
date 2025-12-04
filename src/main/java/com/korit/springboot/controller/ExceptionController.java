@@ -1,0 +1,25 @@
+package com.korit.springboot.controller;
+
+import org.apache.ibatis.binding.BindingException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.sql.SQLIntegrityConstraintViolationException;
+
+
+@RestControllerAdvice   //
+public class ExceptionController {
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<String> duplicatedException(SQLIntegrityConstraintViolationException e) {
+        e.printStackTrace();
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(BindingException.class)
+    public ResponseEntity<String> duplicatedException(BindingException e) {
+        e.printStackTrace();
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
