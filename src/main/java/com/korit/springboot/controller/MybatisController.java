@@ -4,9 +4,10 @@ import com.korit.springboot.dto.RequestStudyInsertDto;
 import com.korit.springboot.mapper.StudyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MybatisController {
@@ -16,9 +17,19 @@ public class MybatisController {
 
     // insert 하는방법
     @PostMapping("/mybatis/study")
-    public ResponseEntity <?> insert() {
-        studyMapper.insert("name", Integer.parseInt("age"));
+    public ResponseEntity <?> insert(@RequestParam String name,@RequestParam int age) {
+        studyMapper.insert(name, age);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/mybatis/study")
+    public ResponseEntity <List<Map<String,Object>>> getAll() {
+        return ResponseEntity.ok(studyMapper.findAll());
+    }
+
+    @GetMapping("/mybatis/study/names")
+    public ResponseEntity <List<String>> getNames() {
+        return ResponseEntity.ok(studyMapper.findAllName());
     }
 
     // Map 으로 insert 하는방법

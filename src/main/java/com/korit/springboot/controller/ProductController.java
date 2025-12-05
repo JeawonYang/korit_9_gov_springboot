@@ -15,8 +15,8 @@ public class ProductController {
     private ProductMapper productMapper;
 
     @PostMapping("/mybatis/product")
-    public ResponseEntity <?> insert(@RequestBody RequestProductInsertDto dto) {
-        productMapper.insert(dto.getProduct_name(), dto.getSize(), dto.getPrice());
+    public ResponseEntity <?> Productinsert(@RequestBody RequestProductInsertDto dto) {
+        productMapper.productInsert(dto.getProduct_name(), dto.getSize(), dto.getPrice());
         return ResponseEntity.ok().build();
     }
 }

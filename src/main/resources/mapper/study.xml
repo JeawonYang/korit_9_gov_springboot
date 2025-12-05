@@ -14,4 +14,12 @@
         from
             study_tb
     </select>
+    <select id="findAll" resultType="java.util.Map">
+        select
+            study_id as studyId,
+            name,
+            age
+        from
+            study_tb
+    </select>
 </mapper>

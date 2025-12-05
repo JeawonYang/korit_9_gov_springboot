@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface ProductMapper {
-    int insert
+    int productInsert
             (@Param("product_name") String product_name,
              @Param("size") String size,
              @Param("price") int price);
