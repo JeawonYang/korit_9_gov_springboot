@@ -25,8 +25,12 @@ public class UserService {
     private final UserMapper userMapper;
 
     @Transactional(rollbackFor = Exception.class)
-    public void createUser(CreateUserRequestDto dto) {
+    public int createUser(CreateUserRequestDto dto) {
+        UserEntity userEntity = dto.toEntity();
+        System.out.println(userEntity);
         userMapper.insert(dto.toEntity());
+        System.out.println(userEntity);
+        return userEntity.getUserId();
     }
 
     public void duplicatedUsername(String username) {

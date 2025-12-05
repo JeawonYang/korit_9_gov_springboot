@@ -49,10 +49,10 @@ public class UserController {
 
 
     @PostMapping("/api/users")
-    public ResponseEntity<?> create(@Valid @RequestBody CreateUserRequestDto dto)  {
+    public ResponseEntity<Map<String, Integer>> create(@Valid @RequestBody CreateUserRequestDto dto)  {
         userService.duplicatedUsername(dto.getUsername());
-        userService.createUser(dto);
-        return ResponseEntity.ok().build();
+        int createdUserId = userService.createUser(dto);
+        return ResponseEntity.ok(Map.of("createdUserId", createdUserId));
     }
 
 
