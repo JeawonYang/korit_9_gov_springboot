@@ -2,10 +2,13 @@ package com.korit.springboot.controller;
 
 import com.korit.springboot.dto.SigninRequestDto;
 import com.korit.springboot.dto.SignupRequestDto;
+import com.korit.springboot.security.PrincipalUser;
 import com.korit.springboot.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +32,10 @@ public class AuthController {
     @PostMapping("/api/auth/signin")
     public ResponseEntity<Map<String, String>> signin(@Valid @RequestBody SigninRequestDto dto) {
         return ResponseEntity.ok(Map.of("accessToken",authService.signin(dto)));
+    }
+
+    @GetMapping("/api/auth/principal")
+    public ResponseEntity<PrincipalUser> getPrincipal(@AuthenticationPrincipal PrincipalUser principalUser) {
+        return ResponseEntity.ok(principalUser);
     }
 }
